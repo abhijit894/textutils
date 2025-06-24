@@ -20,7 +20,18 @@ function App() {
     }, 1500);
   };
 
-  const toggleMode = () => {
+  const removeBodyClasses= ()=>{
+    document.body.classList.remove('bg-light')
+    document.body.classList.remove('bg-dark')
+    document.body.classList.remove('bg-warning')
+    document.body.classList.remove('bg-danger')
+    document.body.classList.remove('bg-success')
+  }
+
+  const toggleMode = (cls) => {
+    removeBodyClasses(cls)
+    document.body.classList.add('bg-' +cls)
+
     if (mode === "light") {
       setMode("dark");
       document.body.style.backgroundColor = "#042743";
@@ -41,10 +52,7 @@ function App() {
         <Alert alert={alert} />
         <div className="container my-3">
           <Routes>
-            <Route
-              path="/about"
-              element={<About />}
-            />
+            <Route path="/about" element={<About mode={mode} />} />
             <Route
               path="/"
               element={
@@ -53,7 +61,7 @@ function App() {
                   heading="Enter the text below"
                   mode={mode}
                 />
-              }
+              } 
             />
           </Routes>
         </div>
